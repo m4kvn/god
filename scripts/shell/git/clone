@@ -1,0 +1,29 @@
+#!/bin/sh
+
+GIT_ROOT=${GIT_ROOT:-$HOME/git}
+
+[ ! -n "$1" ] && echo "usage: clone <git-repository>" && exit 1
+
+URL=$1
+
+if expr "$1" : "https://github.com/" > /dev/null; then
+    DIR=$(echo ${URL#https://github.com/})
+elif expr "$1" : "git@github.com:" > /dev/null; then
+    DIR=$(echo ${URL#git@github.com:})
+elif expr "$1" : "https://gitlab.com/" > /dev/null; then
+    DIR=$(echo ${URL#https://gitlab.com/})
+elif expr "$1" : "git@gitlab.com:" > /dev/null; then
+    DIR=$(echo ${URL#git@gitlab.com:})
+else
+    printf "[clone]\e[36m URL is invalid.\n\e[m" >& 2
+    exit 1
+fi
+DIR=$(echo ${DIR%.git})
+USER=$(echo ${DIR%%/*})
+REPO=$(echo ${DIR##*/})
+
+mkdir -p $GIT_ROOT/$USER
+cd $GIT_ROOT/$USER
+git clone $1
+
+printf "[clone]\e[36m $GIT_ROOT/$USER/$REPO\n\e[m"
