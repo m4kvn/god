@@ -1,15 +1,10 @@
 #!/bin/sh -eu
 
-GOD_ROOT=${GOD_ROOT:-$HOME/.god}
-
-if [ ! -n "$(git status | grep -w 'working tree clean')" ]; then
-    god status
-    printf "\n[god]\e[36m working tree is not clean. Please push before updating. \n\e[m" >& 2
-    exit 1
+if expr "$#" : "0" > /dev/null; then
+    cd ${GOD_ROOT:-$HOME/.god}
+    git fetch && git pull origin master
+    god init
+else
+    cd $1
+    git fetch && git pull origin master
 fi
-
-cd $GOD_ROOT
-git fetch
-git pull origin master
-god init
-exit 0

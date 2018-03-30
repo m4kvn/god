@@ -20,7 +20,7 @@ EOF
 
 case $1 in
     i|init) shift 1 && god-init $@ ;;
-    u|update) god-update ;;
+    u|update) shift 1 && god-update $@ ;;
     p|push) shift 1 && god-push $@ ;;
     s|status) shift 1 && god-status $@;;
     g|git) shift 1 && git $@ ;;

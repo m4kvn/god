@@ -1,4 +1,7 @@
 #!/bin/sh -eu
 
 cd ${1:-${GOD_ROOT:-HOME/.god}}
-git status
+if [ ! -n "$(git status | grep -w 'working tree clean')" ]; then
+    printf "\n[god]\e[36m $(pwd) is updated.\n\e[m"
+    git status --short
+fi

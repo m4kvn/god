@@ -38,18 +38,7 @@ if [ -s ~/.ndenv ]; then
     eval "$(ndenv init -)"
 fi
 
-if [ -s $HOME/.atom ]; then
-    cd $HOME/.atom
-    if [ ! -n "$(git status | grep -w 'working tree clean')" ]; then
-        printf "\n[god]\e[36m $HOME/.atom is updated.\n\e[m"
-        git status --short
-    fi
-fi
-
-if [ -s $GOD_ROOT ]; then
-    cd $GOD_ROOT
-    if [ ! -n "$(git status | grep -w 'working tree clean')" ]; then
-        printf "\n[god]\e[36m $GOD_ROOT is updated.\n\e[m"
-        git status --short
-    fi
+# status
+if [ -s $GOD_ROOT/dotfiles/status.sh ]; then
+    sh $GOD_ROOT/dotfiles/status.sh
 fi
