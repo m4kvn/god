@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -s ~/.configs ]; then
+    cd ~/.configs
+    git fetch
+    git pull origin master
+else
+    printf "configs is not found"
+    exit 1
+fi

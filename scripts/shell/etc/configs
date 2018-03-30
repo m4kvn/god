@@ -1,0 +1,17 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+usage: configs <command>
+
+These are common Configs commands used in various situations:
+
+  - update  Update all configuration
+
+EOF
+}
+
+case $1 in
+    update) configs-update ;;
+    *) usage ;;
+esac

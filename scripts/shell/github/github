@@ -1,0 +1,19 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+usage: github <command>
+
+These are common GitHub commands used in various situations:
+
+  - clone  Clone GitHub repository to ~/git
+  - list   Show GitHub repositories or users in ~/git
+
+EOF
+}
+
+case $1 in
+    clone) github-clone $2 ;;
+    list) github-list $2 ;;
+    *) usage ;;
+esac

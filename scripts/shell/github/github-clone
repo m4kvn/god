@@ -1,0 +1,38 @@
+#!/bin/sh
+
+basedir=~/git
+
+usage() {
+    cat << EOF
+usage: github clone <url>
+EOF
+}
+
+[ ! -n "$1" ] && usage && exit 1
+
+url=$1
+
+if expr "$1" : "https://github.com/" > /dev/null; then
+    dir=$(echo ${url#https://github.com/})
+elif expr "$1" : "git@github.com:" > /dev/null; then
+    dir=$(echo ${url#git@github.com:})
+elif expr "$1" : "https://gitlab.com/" > /dev/null; then
+    dir=$(echo ${url#https://gitlab.com/})
+elif expr "$1" : "git@gitlab.com:" > /dev/null; then
+    dir=$(echo ${url#git@gitlab.com:})
+else
+    echo "URL is invalid"
+    exit 1
+fi
+dir=$(echo ${dir%.git})
+user=$(echo ${dir%%/*})
+repo=$(echo ${dir##*/})
+
+mkdir -p $basedir/$user
+cd $basedir/$user
+git clone $1
+
+cat << EOF
+
+$basedir/$user/$repo
+EOF

@@ -1,0 +1,36 @@
+#!/bin/zsh
+# Android Screenshot Script
+
+adb_devices_result=`adb devices | sed -e '1,1d'`
+echo $adb_devices_result | while read line
+do
+    line_elements=(`echo ${line}`)
+    devices+=($line_elements[1])
+done
+
+if [ $#devices[*] -eq 0 ]; then
+    echo "ERROR: No connected devices."
+    exit
+elif [ $#devices[*] -eq 1 ]; then
+    target_device=$devices[1]
+else
+    echo "Choose a device..."
+    select target_device in $devices
+    do
+        if [ -z $target_device ]; then
+            continue
+        else
+            break
+        fi
+    done
+fi
+
+echo "Now taking a screenshot..."
+
+filename=`date +"%Y%m%d-%H%M%S"`$DATETIME.png
+adb -s $target_device shell screencap /sdcard/$filename
+adb -s $target_device pull /sdcard/$filename .
+adb -s $target_device shell rm /sdcard/$filename
+open ./$filename
+
+echo "Done."
