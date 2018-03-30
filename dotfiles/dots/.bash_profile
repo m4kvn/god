@@ -42,3 +42,6 @@ fi
 if [ -s $ZEUS_ROOT/dotfiles/status.sh ]; then
     sh $ZEUS_ROOT/dotfiles/status.sh
 fi
+
+# alias
+alias z='zeus'
