@@ -1,0 +1,13 @@
+#!/bin/sh -eu
+
+GOD_ROOT=${GOD_ROOT:-$HOME/.god}
+cd $GOD_ROOT
+
+if [ -n "$(git status | grep -w 'working tree clean')" ]; then
+    printf "[god]\e[36 working tree is clean.\n\e[m" >&2
+    exit 0
+fi
+
+git add -A
+git commit -m "Update at $(date "+%Y-%m-%d %T")" || true
+git push origin master

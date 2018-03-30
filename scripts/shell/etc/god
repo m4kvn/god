@@ -1,0 +1,23 @@
+#!/bin/sh
+
+usage() {
+cat << EOF
+usage: god <command>
+
+These are common god commands used in various situations:
+
+  - init    Initialize repository
+  - update  Update repository
+  - push    Push to remote repository
+  - status  Check repository status
+
+EOF
+}
+
+case $1 in
+    i|init) god-init ;;
+    u|update) god-update ;;
+    p|push) god-push ;;
+    s|status) god-status ;;
+    *) usage ;;
+esac

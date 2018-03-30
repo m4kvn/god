@@ -1,0 +1,9 @@
+#!/bin/sh -eu
+
+GOD_ROOT=${GOD_ROOT:-$HOME/.god}
+
+sh $GOD_ROOT/dotfiles/update.sh
+sh $GOD_ROOT/installs/install.sh
+sh $GOD_ROOT/scripts/update.sh
+
+exec $SHELL -l

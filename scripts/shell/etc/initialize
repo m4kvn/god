@@ -1,4 +1,0 @@
-#!/bin/sh
-
-curl -sL https://m4kvn.github.io/initialize/ | sh
-exec $SHELL -l

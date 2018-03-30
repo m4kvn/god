@@ -9,3 +9,5 @@ cd $HOME && find $DIR/dots -type f | xargs -I{} ln -fs {} 2>/dev/null
 if [ ! -s $HOME/.atom ]; then
     git clone https://github.com/m4kvn/atom.git $HOME/.atom
 fi
+
+exit 0

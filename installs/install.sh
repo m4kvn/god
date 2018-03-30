@@ -8,3 +8,5 @@ find $DIR/etc -type f | xargs -I{} sh {}
 
 [ -n "$(gem --version 2>/dev/null)" ] \
     && find $DIR/gems -type f | xargs -I{} sh {}
+
+exit 0
