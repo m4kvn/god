@@ -1,23 +1,28 @@
 #!/bin/sh
 
+GOD_ROOT=${GOD_ROOT:-$HOME/.god}
+cd $GOD_ROOT
+
 usage() {
 cat << EOF
 usage: god <command>
 
 These are common god commands used in various situations:
 
-  - init    Initialize repository
-  - update  Update repository
-  - push    Push to remote repository
-  - status  Check repository status
+  - init, i    Initialize repository
+  - update, u  Update repository
+  - push, p    Push to remote repository
+  - status, s  Check repository status
+  - git, g     Use git command in god
 
 EOF
 }
 
 case $1 in
-    i|init) god-init ;;
+    i|init) shift 1 && god-init $@ ;;
     u|update) god-update ;;
     p|push) god-push ;;
     s|status) god-status ;;
+    g|git) shift 1 && git $@ ;;
     *) usage ;;
 esac

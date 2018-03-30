@@ -2,8 +2,17 @@
 
 GOD_ROOT=${GOD_ROOT:-$HOME/.god}
 
-sh $GOD_ROOT/dotfiles/update.sh
-sh $GOD_ROOT/installs/install.sh
-sh $GOD_ROOT/scripts/update.sh
+all() {
+    sh $GOD_ROOT/dotfiles/update.sh
+    sh $GOD_ROOT/installs/install.sh
+    sh $GOD_ROOT/scripts/update.sh
+}
+
+case $1 in
+    dotfiles|d) sh $GOD_ROOT/dotfiles/update.sh ;;
+    install|i)  sh $GOD_ROOT/installs/install.sh ;;
+    scripts|s)  sh $GOD_ROOT/scripts/update.sh ;;
+    *) all ;;
+esac
 
 exec $SHELL -l
