@@ -1,0 +1,26 @@
+[user]
+	name = m4kvn
+	email = fun.masahiro@gmail.com
+[core]
+	editor = vim -c \"set fenc=utf-8\"
+	precomposeunicode = true
+	quotepath = false
+	excludesfile = ~/.gitignore_global
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+[http]
+	postBuffer = 524288000
+[alias]
+	s = status
+	a = add
+	aa = add -A
+	cc = commit -m
+	p = push
+    pf = push -f
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
