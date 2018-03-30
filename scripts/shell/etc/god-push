@@ -1,6 +1,6 @@
 #!/bin/sh -eu
 
-cd ${1:-$HOME/.god}
+cd ${1:-${GOD_ROOT:-HOME/.god}}
 
 if [ -n "$(git status | grep -w 'working tree clean')" ]; then
     exit 0

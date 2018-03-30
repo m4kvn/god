@@ -1,6 +1,4 @@
 #!/bin/sh -eu
 
-GOD_ROOT=${GOD_ROOT:-$HOME/.god}
-
-cd $GOD_ROOT
+cd ${1:-${GOD_ROOT:-HOME/.god}}
 git status
