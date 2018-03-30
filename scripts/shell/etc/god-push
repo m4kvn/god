@@ -4,7 +4,7 @@ GOD_ROOT=${GOD_ROOT:-$HOME/.god}
 cd $GOD_ROOT
 
 if [ -n "$(git status | grep -w 'working tree clean')" ]; then
-    printf "[god]\e[36 working tree is clean.\n\e[m" >& 2
+    printf "[god]\e[36m working tree is clean.\n\e[m" >& 2
     exit 0
 fi
 
