@@ -1,0 +1,18 @@
+#!/bin/sh -eu
+
+ZEUS_ROOT=${ZEUS_ROOT:-$HOME/.zeus}
+
+all() {
+    sh $ZEUS_ROOT/dotfiles/update.sh
+    sh $ZEUS_ROOT/installs/install.sh
+    sh $ZEUS_ROOT/scripts/update.sh
+}
+
+case ${1:-} in
+    dotfiles|d) sh $ZEUS_ROOT/dotfiles/update.sh ;;
+    install|i)  sh $ZEUS_ROOT/installs/install.sh ;;
+    scripts|s)  sh $ZEUS_ROOT/scripts/update.sh ;;
+    *) all ;;
+esac
+
+exec $SHELL -l

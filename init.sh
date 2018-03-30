@@ -1,16 +1,16 @@
 #!/bin/sh -eu
 
-GOD_ROOT=${GOD_ROOT:-$HOME/.god}
+ZEUS_ROOT=${ZEUS_ROOT:-$HOME/.zeus}
 
 if [ ! $(xcode-select -p 2>/dev/null) ]; then
-    printf '[god]\e[31m `xcode-select --install` is not running.\n\e[m' >& 2
+    printf '[zeus]\e[31m `xcode-select --install` is not running.\n\e[m' >& 2
     exit 1
 fi
 
-if [ ! -d "$GOD_ROOT" ]; then
-    git clone https://github.com/m4kvn/god.git $GOD_ROOT
+if [ ! -d "$ZEUS_ROOT" ]; then
+    git clone https://github.com/m4kvn/zeus.git $ZEUS_ROOT
 fi
 
-sh $GOD_ROOT/installs/init/homebrew.sh
-sh $GOD_ROOT/installs/init/git.sh
-sh $GOD_ROOT/scripts/shell/etc/god-init
+sh $ZEUS_ROOT/installs/init/homebrew.sh
+sh $ZEUS_ROOT/installs/init/git.sh
+sh $ZEUS_ROOT/scripts/shell/zeus/zeus-init

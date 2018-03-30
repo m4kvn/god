@@ -1,0 +1,28 @@
+#!/bin/sh
+
+ZEUS_ROOT=${ZEUS_ROOT:-$HOME/.zeus}
+cd $ZEUS_ROOT
+
+usage() {
+cat << EOF
+usage: zeus <command>
+
+These are common zeus commands used in various situations:
+
+  - init, i    Initialize repository
+  - update, u  Update repository
+  - push, p    Push to remote repository
+  - status, s  Check repository status
+  - git, g     Use git command in zeus
+
+EOF
+}
+
+case $1 in
+    i|init) shift 1 && zeus-init $@ ;;
+    u|update) shift 1 && zeus-update $@ ;;
+    p|push) shift 1 && zeus-push $@ ;;
+    s|status) shift 1 && zeus-status $@;;
+    g|git) shift 1 && git $@ ;;
+    *) usage ;;
+esac

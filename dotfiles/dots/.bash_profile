@@ -1,10 +1,10 @@
 
-# god
-export GOD_ROOT=$HOME/.god
+# zeus
+export ZEUS_ROOT=$HOME/.zeus
 
 # scripts
-if [ -s $GOD_ROOT/scripts/bin ]; then
-    export PATH=$GOD_ROOT/scripts/bin:$PATH
+if [ -s $ZEUS_ROOT/scripts/bin ]; then
+    export PATH=$ZEUS_ROOT/scripts/bin:$PATH
 fi
 
 # adb
@@ -39,6 +39,6 @@ if [ -s ~/.ndenv ]; then
 fi
 
 # status
-if [ -s $GOD_ROOT/dotfiles/status.sh ]; then
-    sh $GOD_ROOT/dotfiles/status.sh
+if [ -s $ZEUS_ROOT/dotfiles/status.sh ]; then
+    sh $ZEUS_ROOT/dotfiles/status.sh
 fi
