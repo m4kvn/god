@@ -6,6 +6,9 @@ export ZEUS_ROOT=$HOME/.zeus
 if [ -s $ZEUS_ROOT/scripts/bin ]; then
     export PATH=$ZEUS_ROOT/scripts/bin:$PATH
 fi
+if [ -s $ZEUS_ROOT/scripts/playground ]; then
+    export PATH=$ZEUS_ROOT/scripts/playground:$PATH
+fi
 
 # adb
 if [ -s ~/Library/Android/sdk/platform-tools ]; then
