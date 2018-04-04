@@ -9,7 +9,7 @@ POSTS_API=https://api.esa.io/v1/teams/pixiv/posts?per_page=40
 [ ! -z "${1:-}" ] && POSTS_API="$POSTS_API&q=$1"
 
 # esaの検索結果をキャッシュ
-ESA_TMP=$(mktemp)
+ESA_TMP=$(mktemp) && trap "rm -f $ESA_TMP" SIGINT
 curl -H "Authorization: Bearer $ESA_TOKEN" \
 -H "Accept: application/json;charset=UTF-8" \
 -s $POSTS_API | jq ".posts[] | {full_name: .full_name, url: .url}" > $ESA_TMP
@@ -20,9 +20,6 @@ FULL_NAME=$(jq -r ".full_name" $ESA_TMP | fzf)
 
 # 選択されたesaのurlを取得し開く
 open $(jq -r "select(.full_name == \"$FULL_NAME\") | .url" $ESA_TMP)
-
-# cat $ESA_TMP
-rm -f $ESA_TMP
 
 # esaのタイトル一覧をキャッシュ
 # ESA_FULL_NAME_TMP=$(mktemp)
