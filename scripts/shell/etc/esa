@@ -3,7 +3,7 @@
 POSTS_API=https://api.esa.io/v1/teams/pixiv/posts?per_page=40
 
 # ESA_TOKENがない場合は終了
-[ -z "$ESA_TOKEN" ] && echo '[esa] Not found ESA_TOKEN.' && exit 1
+[ -z "${ESA_TOKEN:-}" ] && echo '[esa] Not found ESA_TOKEN.' && exit 1
 
 # 引数に検索クエリがあるかどうか確認
 [ ! -z "${1:-}" ] && POSTS_API="$POSTS_API&q=$1"
