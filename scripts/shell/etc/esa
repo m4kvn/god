@@ -9,7 +9,7 @@ POSTS_API=https://api.esa.io/v1/teams/pixiv/posts?per_page=40
 [ ! -z "${1:-}" ] && POSTS_API="$POSTS_API&q=$1"
 
 # esaの検索結果をキャッシュ
-ESA_TMP=$(mktemp) && trap "rm -f $ESA_TMP" SIGINT
+ESA_TMP=$(mktemp) && trap "rm -f $ESA_TMP" 0 2
 curl -H "Authorization: Bearer $ESA_TOKEN" \
 -H "Accept: application/json;charset=UTF-8" \
 -s $POSTS_API | jq ".posts[] | {full_name: .full_name, url: .url}" > $ESA_TMP
