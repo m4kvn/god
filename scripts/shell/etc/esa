@@ -8,8 +8,10 @@ POSTS_API=https://api.esa.io/v1/teams/pixiv/posts?per_page=40
 # 引数に検索クエリがあるかどうか確認
 [ ! -z "${1:-}" ] && POSTS_API="$POSTS_API&q=$1"
 
+# キャッシュ用ファイルを作成
+ESA_TMP=$(mktemp -t esa) && trap "rm -f $ESA_TMP" 0 2
+
 # esaの検索結果をキャッシュ
-ESA_TMP=$(mktemp esa.XXXXXXXX) && trap "rm -f $ESA_TMP" 0 2
 curl -H "Authorization: Bearer $ESA_TOKEN" \
 -H "Accept: application/json;charset=UTF-8" \
 -s $POSTS_API | jq ".posts[] | {full_name: .full_name, url: .url}" > $ESA_TMP
@@ -20,23 +22,3 @@ FULL_NAME=$(jq -r ".full_name" $ESA_TMP | fzf)
 
 # 選択されたesaのurlを取得し開く
 open $(jq -r "select(.full_name == \"$FULL_NAME\") | .url" $ESA_TMP)
-
-# esaのタイトル一覧をキャッシュ
-# ESA_FULL_NAME_TMP=$(mktemp)
-# jq -r ".posts[].full_name" $ESA_TMP > $ESA_FULL_NAME_TMP
-#
-# # esaのURL一覧をキャッシュ
-# ESA_URL_TMP=$(mktemp)
-# jq -r ".posts[].url" $ESA_TMP > $ESA_URL_TMP
-#
-# # 開くesaを選択する
-# FULL_NAME=$(cat $ESA_FULL_NAME_TMP | fzf)
-# [ -z "$FULL_NAME" ] && exit 1
-#
-# # 選択されたURLを開く
-# open $(sed -n $(cat $ESA_FULL_NAME_TMP | \
-# grep -n -F "$FULL_NAME" | \
-# cut -d ":" -f 1)p $ESA_URL_TMP)
-#
-# # キャッシュファイルを削除
-# rm -f $ESA_TMP $ESA_FULL_NAME_TMP $ESA_URL_TMP
