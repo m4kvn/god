@@ -9,6 +9,9 @@ fi
 if [ -s $ZEUS_ROOT/scripts/playground ]; then
     export PATH=$ZEUS_ROOT/scripts/playground:$PATH
 fi
+if [ -s $ZEUS_ROOT/dotfiles/playground/profile ]; then
+    . $ZEUS_ROOT/dotfiles/playground/profile
+fi
 
 # adb
 if [ -s ~/Library/Android/sdk/platform-tools ]; then
