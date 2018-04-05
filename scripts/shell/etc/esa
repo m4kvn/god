@@ -1,11 +1,10 @@
 #!/bin/sh -eu
 
-POSTS_API=https://api.esa.io/v1/teams/pixiv/posts?per_page=40
-
-# ESA_TOKENがない場合は終了
 [ -z "${ESA_TOKEN:-}" ] && echo '[esa] Not found ESA_TOKEN.' && exit 1
 
-# 引数に検索クエリがあるかどうか確認
+[ -z "${ESA_TEAM:-}" ] && echo '[esa] Not found ESA_TEAM.' && exit 1 || \
+POSTS_API=https://api.esa.io/v1/teams/$ESA_TEAM/posts?per_page=40
+
 [ ! -z "${1:-}" ] && POSTS_API="$POSTS_API&q=$1"
 
 # キャッシュ用ファイルを作成
