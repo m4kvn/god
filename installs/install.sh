@@ -43,7 +43,7 @@ install_gem() {
 }
 
 install_go() {
-    cat $DIR/go | xargs -I{} go get {}
+    . $DIR/go
 }
 
 install_etc() {
