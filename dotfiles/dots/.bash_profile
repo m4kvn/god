@@ -13,6 +13,12 @@ if [ -s $ZEUS_ROOT/dotfiles/playground/profile ]; then
     . $ZEUS_ROOT/dotfiles/playground/profile
 fi
 
+# java
+if [ -s ]; then
+    export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "9")
+    export PATH=$JAVA_HOME/bin:$PATH
+fi
+
 # adb
 if [ -s ~/Library/Android/sdk/platform-tools ]; then
     export PATH=~/Library/Android/sdk/platform-tools:$PATH
