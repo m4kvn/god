@@ -27,3 +27,4 @@ cd $GIT_ROOT/$USER
 git clone $1
 
 printf "[clone]\e[36m $GIT_ROOT/$USER/$REPO\n\e[m"
+cd $GIT_ROOT/$USER/$REPO
