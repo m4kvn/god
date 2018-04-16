@@ -10,4 +10,8 @@ if [ ! -s $HOME/.atom ]; then
     git clone https://github.com/m4kvn/atom.git $HOME/.atom
 fi
 
+if [ ! -s $HOME/Boostnote ]; then
+    git clone https://github.com/m4kvn/Boostnote.git $HOME/Boostnote
+fi
+
 exit 0
