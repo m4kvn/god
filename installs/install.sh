@@ -42,10 +42,6 @@ install_gem() {
     rm -f $GEM_LIST
 }
 
-install_go() {
-    . $DIR/go
-}
-
 install_etc() {
     find $DIR/etc -type f | xargs -I{} sh {}
 }
@@ -56,7 +52,6 @@ install_homebrew
 install_shell
 install_lang
 install_gem
-install_go
 install_etc
 
 exit 0
