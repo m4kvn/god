@@ -6,6 +6,7 @@
 	precomposeunicode = true
 	quotepath = false
 	excludesfile = ~/.gitignore_global
+	autocrlf = input
 [color]
 	diff = auto
 	status = auto
