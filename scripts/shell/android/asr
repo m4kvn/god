@@ -1,12 +1,36 @@
-#!/bin/sh
+#!/bin/zsh
 # Android Screenrecord Script
+
+adb_devices_result=`adb devices | sed -e '1,1d'`
+echo $adb_devices_result | while read line
+do
+    line_elements=(`echo ${line}`)
+    devices+=($line_elements[1])
+done
+
+if [ $#devices[*] -eq 0 ]; then
+    echo "ERROR: No connected devices."
+    exit
+elif [ $#devices[*] -eq 1 ]; then
+    target_device=$devices[1]
+else
+    echo "Choose a device..."
+    select target_device in $devices
+    do
+        if [ -z $target_device ]; then
+            continue
+        else
+            break
+        fi
+    done
+fi
 
 DATE=`date '+%y%m%d%H%M%S'`
 FILE_NAME=record-${DATE}
 YOUR_PATH=.
 
-adb shell screenrecord /sdcard/${FILE_NAME}.mp4 &
-pid=`ps x | grep -v grep | grep "adb shell screenrecord" | awk '{ print $1 }'`
+adb -s $target_device shell screenrecord /sdcard/${FILE_NAME}.mp4 &
+pid=`ps x | grep -v grep | grep "adb -s $target_device shell screenrecord" | awk '{ print $1 }'`
 
 if [ -z "$pid" ]; then
   printf "Not running a screenrecord."
@@ -24,15 +48,15 @@ done
 kill -9 $pid # Finished the process of adb screenrecord
 while :
 do
-  alive=`adb shell ps | grep screenrecord | grep -v grep | awk '{ print $9 }'`
+  alive=`adb -s $target_device shell ps | grep screenrecord | grep -v grep | awk '{ print $9 }'`
   if [ -z "$alive" ]; then
       break
   fi
 done
 
 printf "Finished the recording process : $pid\nSending to $YOUR_PATH...\n"
-adb pull /sdcard/${FILE_NAME}.mp4 $YOUR_PATH
-adb shell rm /sdcard/${FILE_NAME}.mp4
+adb -s $target_device pull /sdcard/${FILE_NAME}.mp4 $YOUR_PATH
+adb -s $target_device shell rm /sdcard/${FILE_NAME}.mp4
 
 echo "Converts to GIF? [y]"
 read convertGif
