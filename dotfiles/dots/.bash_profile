@@ -24,6 +24,11 @@ if [ -s ~/Library/Android/sdk/platform-tools ]; then
     export PATH=~/Library/Android/sdk/platform-tools:$PATH
 fi
 
+# android
+if [ -s ~/Library/Android/sdk ]; then
+    export ANDROID_HOME=~/Library/Android/sdk
+fi
+
 # rbenv
 if [ -s ~/.rbenv ]; then
     export PATH=~/.rbenv/bin:$PATH
