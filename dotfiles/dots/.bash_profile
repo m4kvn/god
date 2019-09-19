@@ -13,6 +13,12 @@ if [ -s $ZEUS_ROOT/dotfiles/playground/profile ]; then
     . $ZEUS_ROOT/dotfiles/playground/profile
 fi
 
+# go
+if [ -s ~/go ]; then
+    export GOPATH=~/go
+    export PATH=$GOPATH/bin:$PATH
+fi
+
 # java
 if [ -s ]; then
     export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "9")
