@@ -7,5 +7,7 @@ set guioptions-=e
 set splitbelow
 set splitright
 set backspace=indent,eol,start
+set list
+set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 syntax on
