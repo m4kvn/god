@@ -35,6 +35,11 @@ if [ -s ~/Library/Android/sdk ]; then
     export ANDROID_HOME=~/Library/Android/sdk
 fi
 
+# flutter
+if [ -s ~/git/flutter/flutter/bin ]; then
+    export PATH=~/git/flutter/flutter/bin:$PATH
+fi
+
 # rbenv
 if [ -s ~/.rbenv ]; then
     export PATH=~/.rbenv/bin:$PATH
